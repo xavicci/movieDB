@@ -1,0 +1,20 @@
+{
+  "name": "moviedb",
+  "version": "1.0.0",
+  "description": "App movil to watch movie on sunday.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xavicci/movieDB.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/xavicci/movieDB/issues"
+  },
+  "homepage": "https://github.com/xavicci/movieDB#readme"
+}
