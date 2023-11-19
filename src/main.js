@@ -248,7 +248,6 @@ async function getMovieById(movieId) {
         rgba(0,0,0,0) 29.17%
     ),url(${movieImgUrl})`;
 
-    console.log(movieImgUrl);
     movieDetailTitle.textContent = movie.title;
     movieDetailDescription.textContent = movie.overview;
     movieDetailScore.textContent = movie.vote_average;
