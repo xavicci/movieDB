@@ -46,8 +46,10 @@ const movieimageId = (id) => {
     location.hash = '#movie=' + id;
 }
 
-function createMovies(movies, container) {
-    container.innerHTML = "";
+function createMovies(movies, container, { clean = true } = {}) {
+    if (clean) {
+        container.innerHTML = "";
+    }
 
     const listMovie = movies.map(movie => {
         const movieContainer = document.createElement('div');
@@ -55,11 +57,16 @@ function createMovies(movies, container) {
         const movieImg = document.createElement('img');
         movieImg.classList.add('movie-img');
         movieImg.setAttribute('alt', movie.title);
-        movieImg.setAttribute(
-            'src', `${PATH_IMAGE}${movie.poster_path}`
-        );
-        movieImg.dataset.id = movie.id
+        // movieImg.setAttribute(
+        //     'src', `${PATH_IMAGE}${movie.poster_path}`
+        // );
+        movieImg.dataset.id = movie.id;
+        movieImg.dataset.src = `${PATH_IMAGE}${movie.poster_path}`;
         movieContainer.appendChild(movieImg);
+        registerImage(movieImg);
+        movieImg.addEventListener('error', () => {
+            movieImg.setAttribute('src', 'https://static.thenounproject.com/png/6018987-200.png')
+        })
 
         return movieContainer;
     });
@@ -229,12 +236,36 @@ async function getTrendingMovies() {
     const { data } = await api('trending/movie/day');
     const movies = data.results;
 
-    createMovies(movies, genericSection);
+    createMovies(movies, genericSection, { clean: true });
     genericSection.addEventListener('click', (event) => {
         if (event.target.nodeName === 'IMG') {
             movieimageId(event.target.dataset.id);
         }
     });
+
+    const btnLoadMore = document.createElement('button');
+    btnLoadMore.innerText = 'Cargar más';
+    btnLoadMore.addEventListener('click', getPaginatedTrendingMovies);
+    genericSection.appendChild(btnLoadMore);
+    console.log("holaS")
+
+}
+
+let page = 1;
+async function getPaginatedTrendingMovies() {
+    page++;
+    const { data } = await api('trending/movie/day', {
+        params: {
+            page,
+        },
+    });
+    const movies = data.results;
+    createMovies(movies, genericSection, { clean: false });
+
+    const btnLoadMore = document.createElement('button');
+    btnLoadMore.innerText = 'Cargar más';
+    btnLoadMore.addEventListener('click', getPaginatedTrendingMovies);
+    genericSection.appendChild(btnLoadMore);
 }
 
 async function getMovieById(movieId) {
