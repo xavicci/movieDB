@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/xavicci/movieDB/issues"
   },
-  "homepage": "https://github.com/xavicci/movieDB#readme"
+  "homepage": "https://github.com/xavicci/movieDB#readme",
+  "dependencies": {
+    "dotenv": "^16.3.1"
+  }
 }
