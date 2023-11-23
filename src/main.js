@@ -1,6 +1,6 @@
-// import 'dotenv/config';
+
 require('dotenv').config();
-console.log(process.env);
+
 const URL_API_BASE = "https://api.themoviedb.org/3";
 const TREND = "/trending/movie/day?"
 const GENRE = "/genre/movie/list?"
