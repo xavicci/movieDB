@@ -1,3 +1,6 @@
+
+require('dotenv').config();
+
 const URL_API_BASE = "https://api.themoviedb.org/3";
 const TREND = "/trending/movie/day?"
 const GENRE = "/genre/movie/list?"
@@ -10,7 +13,7 @@ const api = axios.create({
         'Content-Type': 'application/json;charset=utf-8',
     },
     params: {
-        api_key: API_KEY2,
+        api_key: process.env.API_KEY,
         language: 'es-Mx',
     }
 });

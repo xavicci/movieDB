@@ -132,3 +132,4 @@ dist
 
 # secret.js (API KEY)
 src/secrets.js
+.env
